@@ -1,0 +1,243 @@
+@import "./fonts.css";
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@theme {
+    /* Brand — deep petrol navy (institutional, not indigo/violet) */
+    --color-brand-50: #f0f5f9;
+    --color-brand-100: #dce6f0;
+    --color-brand-200: #b9cbdd;
+    --color-brand-300: #8ca9c2;
+    --color-brand-400: #5e87a8;
+    --color-brand-500: #37688f;
+    --color-brand-600: #2a557a;
+    --color-brand-700: #1e4262;
+    --color-brand-800: #16324b;
+    --color-brand-900: #10283f;
+    --color-brand-950: #0c1f33;
+
+    /* Accent — warm amber/gold, used sparingly */
+    --color-accent-50: #fdf5ea;
+    --color-accent-100: #fae8cd;
+    --color-accent-200: #f3cf99;
+    --color-accent-300: #eab060;
+    --color-accent-400: #e09b3e;
+    --color-accent-500: #d17f22;
+    --color-accent-600: #b96a17;
+    --color-accent-700: #975416;
+    --color-accent-800: #7a4319;
+    --color-accent-900: #653818;
+
+    /* Ink & surfaces — warm-tilted neutrals */
+    --color-ink-900: #1c2630;
+    --color-ink-700: #35424f;
+    --color-ink-500: #566675;
+    --color-ink-400: #6b7b8a;
+    --color-ink-300: #93a1ad;
+    --color-ink-200: #c3ccd4;
+    --color-ink-100: #e2e7eb;
+
+    --color-paper: #faf7f1;
+    --color-paper-50: #fdfbf6;
+    --color-line: #e5e0d6;
+    --color-line-strong: #d3ccbd;
+
+    /* Fonts */
+    --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+
+    /* Letter sizes for display */
+    --letter-display-text: -0.02em;
+    --letter-heading-text: -0.015em;
+
+    /* Shadows — restrained */
+    --shadow-soft: 0 1px 2px rgb(28 38 48 / 0.05), 0 12px 28px -18px rgb(28 38 48 / 0.18);
+    --shadow-lift: 0 2px 4px rgb(28 38 48 / 0.06), 0 22px 42px -22px rgb(28 38 48 / 0.28);
+
+    --radius-panel: 0.75rem;
+}
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-paper text-ink-900 font-sans text-base leading-relaxed antialiased;
+    }
+
+    ::selection {
+        background-color: var(--color-brand-200);
+        color: var(--color-brand-950);
+    }
+
+    h1, h2, h3, h4 {
+        @apply text-balance;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-brand-600);
+        outline-offset: 2px;
+    }
+}
+
+@layer components {
+    /* ---- Buttons ---- */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors duration-150 cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+    .btn-primary {
+        @apply bg-brand-800 text-white hover:bg-brand-900 active:bg-brand-950;
+    }
+    .btn-accent {
+        @apply bg-accent-600 text-white hover:bg-accent-700 active:bg-accent-800;
+    }
+    .btn-outline {
+        @apply border border-line-strong bg-white text-ink-900 hover:border-brand-500 hover:text-brand-800;
+    }
+    .btn-ghost {
+        @apply bg-transparent text-ink-700 hover:bg-ink-100/60 hover:text-brand-800;
+    }
+    .btn-danger {
+        @apply bg-rose-600 text-white hover:bg-rose-700;
+    }
+    .btn-sm {
+        @apply px-3 py-1.5 text-xs;
+    }
+    .btn-lg {
+        @apply px-6 py-3.5 text-base;
+    }
+
+    /* ---- Form fields ---- */
+    .label {
+        @apply block text-sm font-semibold text-ink-700 mb-1.5;
+    }
+    .field {
+        @apply block w-full rounded-md border border-line-strong bg-white px-3.5 py-2.5 text-sm text-ink-900 shadow-none placeholder:text-ink-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-600/25;
+    }
+    .field-error {
+        @apply block text-xs font-medium text-rose-600;
+    }
+    select.field {
+        @apply pr-9;
+    }
+
+    /* ---- Panels / cards ---- */
+    .panel {
+        @apply rounded-panel border border-line bg-white shadow-soft;
+    }
+    .panel-head {
+        @apply flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4;
+    }
+    .panel-pad {
+        @apply p-5 sm:p-6;
+    }
+
+    /* ---- Section rhythm for public site ---- */
+    .section {
+        @apply py-16 sm:py-24;
+    }
+    .container-site {
+        @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    }
+
+    /* ---- Eyebrow / kicker ---- */
+    .eyebrow {
+        @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-accent-700;
+    }
+    .eyebrow::before {
+        content: "";
+        @apply block h-px w-6 bg-accent-500;
+    }
+    .eyebrow-on-dark {
+        @apply text-accent-300;
+    }
+    .eyebrow-on-dark::before {
+        @apply bg-accent-400;
+    }
+
+    /* ---- Semantic text tones ---- */
+    .text-ink-soft {
+        @apply text-ink-500;
+    }
+    .text-ink-faint {
+        @apply text-ink-300;
+    }
+
+    /* ---- Shadow helpers ---- */
+    .shadow-card {
+        box-shadow: var(--shadow-soft);
+    }
+    .shadow-card-lg,
+    .shadow-pop {
+        box-shadow: var(--shadow-lift);
+    }
+
+    /* ---- Table ---- */
+    .table-site {
+        @apply w-full text-left text-sm;
+    }
+    .table-site thead th {
+        @apply border-b border-line-strong bg-paper px-4 py-3 text-xs font-bold uppercase tracking-wide text-ink-500;
+    }
+    .table-site tbody td {
+        @apply border-b border-line px-4 py-3 align-middle;
+    }
+    .table-site tbody tr:hover td {
+        @apply bg-paper-50;
+    }
+
+    /* ---- Status markers ---- */
+    .status-dot {
+        @apply inline-block h-2.5 w-2.5 rounded-full;
+    }
+    .badge {
+        @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold;
+    }
+    .badge-green   { @apply border-emerald-200 bg-emerald-50 text-emerald-800; }
+    .badge-amber   { @apply border-amber-200 bg-amber-50 text-amber-800; }
+    .badge-red     { @apply border-rose-200 bg-rose-50 text-rose-700; }
+    .badge-brand   { @apply border-brand-200 bg-brand-50 text-brand-800; }
+    .badge-slate   { @apply border-ink-200 bg-ink-100/50 text-ink-500; }
+    .badge-accent  { @apply border-accent-200 bg-accent-50 text-accent-800; }
+
+    /* ---- Article / long-form prose ---- */
+    .article-prose {
+        @apply text-[1.0625rem] leading-8 text-ink-700;
+    }
+    .article-prose p { @apply mb-6; }
+    .article-prose h2 { @apply font-display text-2xl font-semibold text-ink-900 mt-12 mb-4; }
+    .article-prose h3 { @apply text-lg font-bold text-ink-900 mt-8 mb-3; }
+    .article-prose ul { @apply list-disc pl-6 mb-6 space-y-2; }
+    .article-prose ol { @apply list-decimal pl-6 mb-6 space-y-2; }
+    .article-prose blockquote { @apply border-l-4 border-accent-400 bg-paper px-5 py-3 my-8 font-display text-xl italic text-ink-700; }
+    .article-prose a { @apply font-semibold text-brand-700 underline decoration-brand-300 underline-offset-4 hover:decoration-brand-600; }
+    .article-prose img { @apply rounded-lg my-8; }
+}
+
+@layer utilities {
+    .font-display-text {
+        letter-spacing: var(--letter-display-text);
+    }
+    .prose-measure {
+        max-width: 68ch;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

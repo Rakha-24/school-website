@@ -1,0 +1,9 @@
+.pgdata
+.git
+tests
+.env
+.env.*
+node_modules
+storage/framework
+storage/logs
+storage/app/private
