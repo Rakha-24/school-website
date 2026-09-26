@@ -34,6 +34,15 @@ class CachePublicPage
         'sitemap',
     ];
 
+    /**
+     * Sitemap tetap ikut di-cache: isinya sama untuk semua pengunjung dan
+     * tidak memuat token CSRF, sedangkan membiarkan crawler menembus ke
+     * origin akan menambah beban query pada database yang sudah lambat.
+     *
+     * @var list<string>
+     */
+    private const CACHEABLE_CONTENT_TYPES = ['text/html', 'application/xml'];
+
     public function handle(Request $request, Closure $next): Response
     {
         // Dicek sebelum $next: EncryptCookies di dalam pipeline dapat
@@ -73,10 +82,21 @@ class CachePublicPage
             return false;
         }
 
-        if (! str_contains((string) $response->headers->get('Content-Type'), 'text/html')) {
+        if (! $this->isCacheableContentType((string) $response->headers->get('Content-Type'))) {
             return false;
         }
 
         return in_array($request->route()?->getName(), self::CACHEABLE_ROUTES, true);
+    }
+
+    private function isCacheableContentType(string $contentType): bool
+    {
+        foreach (self::CACHEABLE_CONTENT_TYPES as $allowed) {
+            if (str_contains($contentType, $allowed)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
