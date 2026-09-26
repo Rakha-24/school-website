@@ -38,11 +38,23 @@ class SettingController extends Controller
 
         $validator->validate();
 
-        foreach ($validator->validated() as $key => $value) {
-            if ($key === 'ppdb_open') {
-                $value = '1';
+        // Hanya key yang benar-benar berupa teks. `logo` sengaja tidak ikut
+        // di sini: objek UploadedFile tidak boleh pernah masuk ke tabel
+        // settings — nilainya adalah path sementara PHP yang tidak pernah
+        // menjadi gambar.
+        $textKeys = [
+            'school_name', 'tagline', 'address', 'phone',
+            'email', 'ppdb_open', 'ppdb_year', 'hero_headline',
+        ];
+
+        $validated = $validator->validated();
+
+        foreach ($textKeys as $key) {
+            if (! array_key_exists($key, $validated)) {
+                continue;
             }
-            Setting::set($key, (string) $value);
+
+            Setting::set($key, $key === 'ppdb_open' ? '1' : (string) $validated[$key]);
         }
 
         if (request()->boolean('logo_remove')) {

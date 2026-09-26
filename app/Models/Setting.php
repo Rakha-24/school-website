@@ -40,6 +40,33 @@ class Setting extends Model
         static::updateOrCreate(['key' => $key], ['value' => $value]);
     }
 
+    /**
+     * Nilai setting yang dipakai sebagai path di dalam public disk.
+     *
+     * Nilai yang dikembalikan selalu path relatif yang aman untuk disisipkan ke
+     * URL aset. Path absolut, traversal, atau URL eksternal ditolak karena
+     * berarti nilainya bukan rujukan upload yang sah — memakainya akan
+     * menghasilkan <img> yang rusak, bukan gambar.
+     */
+    public static function path(string $key): ?string
+    {
+        $value = static::get($key);
+
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        $value = trim($value);
+
+        $rejected = str_contains($value, '..')
+            || str_starts_with($value, '/')
+            || str_starts_with($value, '\\')
+            || preg_match('#^[a-zA-Z]:#', $value) === 1
+            || preg_match('#^[a-z][a-z0-9+.\-]*://#i', $value) === 1;
+
+        return $rejected ? null : $value;
+    }
+
     protected static function booted(): void
     {
         static::saved(function (): void {

@@ -62,6 +62,43 @@ class AdminSettingsLogoTest extends TestCase
         Storage::disk('public')->assertMissing($path);
     }
 
+    public function test_upload_does_not_store_php_temp_path_in_settings(): void
+    {
+        Storage::fake('public');
+
+        $this->actingAs($this->admin)
+            ->put(route('portal.admin.settings.update'), [
+                'school_name' => 'SMK Taruna Sains Kediri',
+                'address' => 'Jl. Pendidikan No. 1',
+                'email' => 'smk.tarunasains@gmail.com',
+                'logo' => UploadedFile::fake()->image('logo.png', 120, 120),
+            ]);
+
+        $path = Setting::get('logo');
+
+        $this->assertNotSame('', (string) $path, 'path tempfile PHP tidak boleh tersimpan di settings');
+        $this->assertStringNotContainsString('php', strtolower((string) $path));
+        $this->assertFalse(
+            str_starts_with((string) $path, '/'),
+            'settings logo harus path relatif, bukan path absolut'
+        );
+        $this->assertSame($path, Setting::path('logo'), 'nilai tersimpan harus lolos validasi Setting::path()');
+    }
+
+    public function test_corrupt_stored_value_falls_back_to_default_logo(): void
+    {
+        // Nilai seperti ini pernah tersimpan karena bug casting UploadedFile ke
+        // string. render harus memakainya sebagai null, bukan <img> rusak.
+        Setting::set('logo', '/tmp/php7de7v8l8rl0cdch0ft7');
+
+        $this->assertNull(Setting::path('logo'));
+
+        $this->actingAs($this->admin)
+            ->get(route('portal.admin.settings'))
+            ->assertOk()
+            ->assertDontSee('/storage//tmp/php', false);
+    }
+
     public function test_invalid_logo_is_rejected(): void
     {
         Storage::fake('public');

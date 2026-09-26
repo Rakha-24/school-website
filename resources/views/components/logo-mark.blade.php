@@ -1,6 +1,6 @@
 @props(['class' => 'size-10'])
 
-@php($logo = App\Models\Setting::get('logo'))
+@php($logo = App\Models\Setting::path('logo'))
 
 @if ($logo)
     <img src="{{ asset('storage/'.$logo) }}" alt="Logo sekolah" class="{{ $class }} shrink-0 rounded-md object-contain" />
