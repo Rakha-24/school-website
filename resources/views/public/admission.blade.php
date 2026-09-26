@@ -20,7 +20,7 @@
             @if ($groups->has('requirement'))
                 <a href="#persyaratan" class="btn btn-accent">Lihat Persyaratan <x-icon name="chevron-down" class="size-4" /></a>
             @endif
-            <a href="{{ route('contact.show') }}" class="btn border border-brand-700 bg-white/5 text-white backdrop-blur transition-colors hover:border-accent-400 hover:text-accent-300">
+            <a href="{{ route('contact.show') }}" class="btn border border-brand-700 bg-white/10 text-white transition-colors hover:border-accent-400 hover:text-accent-300">
                 Hubungi Panitia
             </a>
         </div>
@@ -98,7 +98,7 @@
 
                 <div class="mx-auto max-w-3xl space-y-3">
                     @foreach ($faqs as $faq)
-                        <details class="group rounded-lg border border-brand-800 bg-brand-900/60 backdrop-blur">
+                        <details class="group rounded-lg border border-brand-800 bg-brand-900/80">
                             <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-semibold text-white sm:text-base">
                                 {{ $faq->question }}
                                 <x-icon name="chevron-down" class="size-4 shrink-0 text-accent-400 transition-transform duration-200 group-open:rotate-180" />

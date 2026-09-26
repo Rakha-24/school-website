@@ -1,0 +1,1 @@
+document.addEventListener("click",n=>{const t=n.target.closest("[data-menu-toggle]");if(!t)return;const e=document.getElementById(t.getAttribute("aria-controls"));e&&(e.classList.toggle("hidden"),t.setAttribute("aria-expanded",String(!e.classList.contains("hidden"))))});

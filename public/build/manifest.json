@@ -1,23 +1,11 @@
 {
-  "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-opsz-normal.woff2": {
-    "file": "assets/fraunces-latin-ext-opsz-normal-CJcjJNj7.woff2",
-    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-opsz-normal.woff2"
-  },
   "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-wght-normal.woff2": {
     "file": "assets/fraunces-latin-ext-wght-normal-Ca2vKHc0.woff2",
     "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-wght-normal.woff2"
   },
-  "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2": {
-    "file": "assets/fraunces-latin-opsz-normal-DihXLNYH.woff2",
-    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2"
-  },
   "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2": {
     "file": "assets/fraunces-latin-wght-normal-ukD16Tqj.woff2",
     "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2"
-  },
-  "node_modules/@fontsource-variable/fraunces/files/fraunces-vietnamese-opsz-normal.woff2": {
-    "file": "assets/fraunces-vietnamese-opsz-normal-Czevyj-6.woff2",
-    "src": "node_modules/@fontsource-variable/fraunces/files/fraunces-vietnamese-opsz-normal.woff2"
   },
   "node_modules/@fontsource-variable/fraunces/files/fraunces-vietnamese-wght-normal.woff2": {
     "file": "assets/fraunces-vietnamese-wght-normal-CnvboYUG.woff2",
@@ -52,7 +40,7 @@
     "src": "node_modules/@fontsource-variable/inter/files/inter-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-B_M5zxov.css",
+    "file": "assets/app-CVFhF0Ge.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -61,9 +49,15 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-BT0BIuFu.js",
+    "file": "assets/app-BtNkc0or.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/public.js": {
+    "file": "assets/public-BGzyHKHs.js",
+    "name": "public",
+    "src": "resources/js/public.js",
     "isEntry": true
   }
 }

@@ -12,26 +12,39 @@ class Setting extends Model
 
     protected $guarded = [];
 
+    /**
+     * Peta pengaturan yang sudah di-resolve untuk request berjalan, sehingga
+     * membaca beberapa key (logo, hero, PPDB) hanya membutuhkan satu lookup
+     * alih-alih satu round-trip database per key.
+     */
+    protected static ?array $resolved = null;
+
     public static function get(string $key, ?string $default = null): ?string
     {
-        return static::cache()->rememberForever('setting.'.$key, function () use ($key, $default) {
-            return static::where('key', $key)->value('value') ?? $default;
+        return static::map()[$key] ?? $default;
+    }
+
+    public static function map(): array
+    {
+        if (static::$resolved !== null) {
+            return static::$resolved;
+        }
+
+        return static::$resolved = Cache::rememberForever('settings.all', function () {
+            return static::pluck('value', 'key')->all();
         });
     }
 
     public static function set(string $key, ?string $value): void
     {
         static::updateOrCreate(['key' => $key], ['value' => $value]);
-        static::cache()->forget('setting.'.$key);
-    }
-
-    private static function cache()
-    {
-        return Cache::store('database');
     }
 
     protected static function booted(): void
     {
-        static::saved(fn () => static::cache()->flush());
+        static::saved(function (): void {
+            static::$resolved = null;
+            Cache::forget('settings.all');
+        });
     }
 }

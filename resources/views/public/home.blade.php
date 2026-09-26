@@ -3,7 +3,7 @@
     {{-- Hero --}}
     <section class="relative overflow-hidden border-b border-line bg-brand-950 text-white">
         <div class="absolute inset-0">
-            <img src="{{ asset('storage/'.$heroImage) }}" alt="" class="h-full w-full object-cover opacity-30">
+            <img src="{{ asset('storage/'.$heroImage) }}" alt="" class="h-full w-full object-cover opacity-30" fetchpriority="high" decoding="async">
             <div class="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/92 to-brand-950/55"></div>
             <div class="absolute inset-0 bg-[radial-gradient(42rem_26rem_at_90%_-10%,rgba(185,106,23,0.35),transparent)]"></div>
         </div>
@@ -20,7 +20,7 @@
                 </p>
                 <div class="mt-8 flex flex-wrap items-center gap-3">
                     <a href="{{ route('academic.show') }}" class="btn btn-accent btn-lg">Jelajahi Program Keahlian <x-icon name="arrow-right" class="size-4" /></a>
-                    <a href="{{ route('admission.show') }}" class="btn btn-lg border border-brand-700 bg-white/5 text-white backdrop-blur transition-colors hover:border-accent-400 hover:text-accent-300">Info PPDB {{ now()->year + 1 }}</a>
+                    <a href="{{ route('admission.show') }}" class="btn btn-lg border border-brand-700 bg-white/10 text-white transition-colors hover:border-accent-400 hover:text-accent-300">Info PPDB {{ now()->year + 1 }}</a>
                 </div>
                 <p class="mt-7 text-xs font-medium tracking-wide text-brand-400">
                     Tahun ajaran {{ now()->year }}/{{ now()->year + 1 }} · Pendaftaran dibuka bulan ini
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="relative border-t border-brand-800 bg-brand-900/70 backdrop-blur">
+        <div class="relative border-t border-brand-800 bg-brand-900/85">
             <div class="container-site grid grid-cols-2 divide-x divide-brand-800 sm:grid-cols-4">
                 <x-stat label="Program Keahlian" value="{{ $programCount }}" />
                 <x-stat label="Guru Bersertifikasi" value="30+" />
@@ -43,7 +43,7 @@
         <div class="container-site grid items-center gap-12 lg:grid-cols-2">
             <div class="relative">
                 <div class="overflow-hidden rounded-lg shadow-card">
-                    <img src="{{ asset('storage/seeds/campus.jpg') }}" alt="Gedung SMK Taruna Sains Kediri" class="aspect-[4/3] w-full object-cover">
+                    <img src="{{ asset('storage/seeds/campus.jpg') }}" alt="Gedung SMK Taruna Sains Kediri" class="aspect-[4/3] w-full object-cover" loading="lazy" decoding="async">
                 </div>
                 <div class="absolute -bottom-5 right-4 rounded-md border border-line bg-white px-5 py-3 shadow-card sm:-right-5">
                     <p class="font-display text-2xl font-semibold text-brand-950">{{ now()->year - 1994 }}</p>
@@ -135,7 +135,7 @@
 
                 <div class="grid gap-6 md:grid-cols-3">
                     @foreach ($featuredAchievements as $a)
-                        <article class="rounded-lg border border-brand-800 bg-brand-900/60 p-6 backdrop-blur transition-colors hover:border-accent-500/50">
+                        <article class="rounded-lg border border-brand-800 bg-brand-900/80 p-6 transition-colors hover:border-accent-500/50">
                             <p class="flex items-center gap-2 text-xs">
                                 <x-icon name="trophy" class="size-4 text-accent-400" />
                                 <span class="font-semibold uppercase tracking-[0.12em] text-accent-300">{{ $a->level }}</span>

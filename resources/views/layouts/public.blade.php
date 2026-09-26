@@ -7,7 +7,10 @@
     <meta name="description" content="{{ ($seo ?? $metaDescription ?? '') ?: 'SMK Taruna Sains Kediri — sekolah menengah kejuruan dengan program unggulan Teknik Alat Berat.' }}">
     <title>{{ isset($title) ? $title.' — ' : '' }}SMK Taruna Sains Kediri</title>
     <link rel="icon" href="{{ asset('storage/favicon.svg') }}" type="image/svg+xml">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (request()->routeIs('home'))
+        <link rel="preload" as="image" href="{{ asset('storage/'.App\Models\Setting::get('home_hero_image', 'seeds/hero.jpg')) }}" fetchpriority="high">
+    @endif
+    @vite(['resources/css/app.css', 'resources/js/public.js'])
     @stack('head')
 </head>
 <body class="min-h-screen bg-paper font-sans text-ink antialiased">
@@ -36,7 +39,7 @@
     </div>
 
     {{-- Main header --}}
-    <header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+    <header class="sticky top-0 z-40 border-b border-line bg-paper">
         <div class="container-site flex h-16 items-center justify-between gap-6">
             <a href="{{ route('home') }}" class="flex items-center gap-3" aria-label="Beranda SMK Taruna Sains Kediri">
                 <x-logo-mark class="size-10" />
