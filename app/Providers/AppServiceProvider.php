@@ -29,8 +29,13 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('view-report', fn ($user) => Access::admin($user));
 
         Gate::define('manage-class-subjects', fn ($user) => Access::admin($user));
+
+        // Delegasi ke Access::teacherManagesClass(), bukan aturan sendiri. Versi
+        // sebelumnya hanya mengizinkan wali kelas, sementara dropdown presensi
+        // menampilkan kelas dari mapel yang diampu — guru mapel pun melihat
+        // kelas miliknya di dropdown lalu mendapat 403.
         Gate::define('manageClass', fn ($user, $class) => Access::admin($user)
-            || (Access::teacher($user) && $class->homeroom_teacher_id === $user->teacher->id));
+            || Access::teacherManagesClass($user, $class));
 
         Gate::define('create-materials', fn ($user) => $user->isTeacher() || Access::admin($user));
         Gate::define('create-assignments', fn ($user) => $user->isTeacher() || Access::admin($user));
