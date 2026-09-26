@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Learning\SubmissionRequest;
 use App\Models\Assignment;
+use App\Traits\HandlesUploads;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,8 @@ use Illuminate\View\View;
 
 class AssignmentController extends Controller
 {
+    use HandlesUploads;
+
     public function index(Request $request): View
     {
         $student = Auth::user()->student;
@@ -59,8 +62,12 @@ class AssignmentController extends Controller
         $data = $request->validated();
         unset($data['answer_text']);
 
+        $previous = $assignment->submissions()
+            ->where('student_id', $student->id)
+            ->value('file_path');
+
         if ($request->hasFile('file')) {
-            $data['file_path'] = $request->file('file')->store('submissions');
+            $data['file_path'] = $this->storeSanitizedFile($request->file('file'), 'submissions');
             $data['answer_text'] = null;
         } else {
             $data['answer_text'] = $request->input('answer_text');
@@ -73,6 +80,10 @@ class AssignmentController extends Controller
         $data['graded_at'] = null;
 
         $submission = $assignment->submissions()->updateOrCreate(['assignment_id' => $assignment->id, 'student_id' => $student->id], $data);
+
+        if ($previous && $previous !== ($data['file_path'] ?? null)) {
+            $this->deleteStoredFile($previous);
+        }
 
         return redirect()->route('portal.student.assignments.show', $assignment)
             ->with('status', 'Jawaban Anda berhasil '.($submission->wasRecentlyCreated ? 'dikirim' : 'diperbarui').'.');
