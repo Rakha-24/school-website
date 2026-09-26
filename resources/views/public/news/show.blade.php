@@ -3,7 +3,7 @@
     {{-- Hero artikel --}}
     <section class="relative overflow-hidden bg-brand-950 text-white">
         @if ($news->cover_image)
-            <img src="{{ asset('storage/'.$news->cover_image) }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-30" loading="eager">
+            <x-image :src="$news->cover_image" alt="" class="absolute inset-0 h-full w-full object-cover opacity-30" loading="eager" />
             <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/85 to-brand-950/55"></div>
         @else
             <div class="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_85%_-10%,rgba(185,106,23,0.28),transparent)]"></div>
@@ -100,7 +100,7 @@
                     <a href="{{ route('news.show', $item) }}" class="group overflow-hidden rounded-lg border border-line bg-white shadow-card transition-shadow hover:shadow-card-lg">
                         @if ($item->cover_image)
                             <div class="aspect-[16/9] overflow-hidden">
-                                <img src="{{ asset('storage/'.$item->cover_image) }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy">
+                                <x-image :src="$item->cover_image" :alt="$item->title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                             </div>
                         @endif
                         <div class="p-5">

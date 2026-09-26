@@ -8,7 +8,18 @@
     <title>{{ isset($title) ? $title.' — ' : '' }}SMK Taruna Sains Kediri</title>
     <link rel="icon" href="{{ asset('storage/favicon.svg') }}" type="image/svg+xml">
     @if (request()->routeIs('home'))
-        <link rel="preload" as="image" href="{{ asset('storage/'.App\Models\Setting::get('home_hero_image', 'seeds/hero.jpg')) }}" fetchpriority="high">
+        @php
+            // Preload harus menunjuk format yang benar-benar akan dirender oleh
+            // <x-image>, kalau tidak browser mengunduh dua kali (preload JPEG +
+            // render WebP). Aturannya sama dengan komponen image: pakai WebP
+            // kalau ada, kalau tidak jatuh ke JPEG asli.
+            $heroImage = App\Models\Setting::get('home_hero_image', 'seeds/hero.jpg');
+            $heroWebp = 'storage/'.preg_replace('/\.[^.]+$/', '.webp', $heroImage);
+            $heroPreload = is_file(public_path($heroWebp))
+                ? ['type' => 'image/webp', 'href' => asset($heroWebp)]
+                : ['type' => 'image/jpeg', 'href' => asset('storage/'.$heroImage)];
+        @endphp
+        <link rel="preload" as="image" type="{{ $heroPreload['type'] }}" href="{{ $heroPreload['href'] }}" fetchpriority="high">
     @endif
     @vite(['resources/css/app.css', 'resources/js/public.js'])
     @stack('head')

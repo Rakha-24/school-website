@@ -3,7 +3,7 @@
     {{-- Hero --}}
     <section class="relative overflow-hidden border-b border-line bg-brand-950 text-white">
         <div class="absolute inset-0">
-            <img src="{{ asset('storage/'.$heroImage) }}" alt="" class="h-full w-full object-cover opacity-30" fetchpriority="high" decoding="async">
+            <x-image :src="$heroImage" alt="" class="h-full w-full object-cover opacity-30" loading="eager" fetchpriority="high" />
             <div class="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/92 to-brand-950/55"></div>
             <div class="absolute inset-0 bg-[radial-gradient(42rem_26rem_at_90%_-10%,rgba(185,106,23,0.35),transparent)]"></div>
         </div>
@@ -43,7 +43,7 @@
         <div class="container-site grid items-center gap-12 lg:grid-cols-2">
             <div class="relative">
                 <div class="overflow-hidden rounded-lg shadow-card">
-                    <img src="{{ asset('storage/seeds/campus.jpg') }}" alt="Gedung SMK Taruna Sains Kediri" class="aspect-[4/3] w-full object-cover" loading="lazy" decoding="async">
+                    <x-image src="seeds/campus.jpg" alt="Gedung SMK Taruna Sains Kediri" class="aspect-[4/3] w-full object-cover" widths="760" sizes="(min-width: 1024px) 570px, 92vw" />
                 </div>
                 <div class="absolute -bottom-5 right-4 rounded-md border border-line bg-white px-5 py-3 shadow-card sm:-right-5">
                     <p class="font-display text-2xl font-semibold text-brand-950">{{ now()->year - 1994 }}</p>
@@ -102,7 +102,7 @@
                 ] as $p)
                     <article class="group overflow-hidden rounded-lg border border-line bg-paper shadow-card transition-shadow hover:shadow-card-lg">
                         <div class="relative aspect-[16/10] overflow-hidden">
-                            <img src="{{ asset('storage/seeds/'.$p['img']) }}" alt="{{ $p['name'] }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy">
+                            <x-image :src="'seeds/'.$p['img']" :alt="$p['name']" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                             <span class="absolute top-3 left-3 rounded-md bg-brand-950/85 px-2.5 py-1 font-display text-xs font-bold tracking-wide text-accent-300">{{ $p['code'] }}</span>
                         </div>
                         <div class="p-6">
@@ -164,7 +164,7 @@
                         <a href="{{ route('news.show', $n) }}" class="group overflow-hidden rounded-lg border border-line bg-white shadow-card transition-shadow hover:shadow-card-lg">
                             @if ($n->cover_image)
                                 <div class="aspect-[16/9] overflow-hidden">
-                                    <img src="{{ asset('storage/'.$n->cover_image) }}" alt="" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy">
+                                    <x-image :src="$n->cover_image" alt="" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                                 </div>
                             @endif
                             <div class="p-5">

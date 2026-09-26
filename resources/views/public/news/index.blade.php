@@ -42,7 +42,7 @@
                     <a href="{{ route('news.show', $item) }}" class="group flex flex-col overflow-hidden rounded-lg border border-line bg-white shadow-card transition-shadow hover:shadow-card-lg">
                         @if ($item->cover_image)
                             <div class="aspect-[16/9] overflow-hidden">
-                                <img src="{{ asset('storage/'.$item->cover_image) }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy">
+                                <x-image :src="$item->cover_image" :alt="$item->title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                             </div>
                         @endif
                         <div class="flex flex-1 flex-col p-5">

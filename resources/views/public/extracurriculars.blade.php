@@ -20,7 +20,7 @@
                     <a href="{{ route('extracurriculars.show', $item) }}" class="group flex flex-col overflow-hidden rounded-lg border border-line bg-white shadow-card transition-shadow hover:shadow-card-lg">
                         <div class="relative aspect-[16/10] overflow-hidden">
                             @if ($item->photo)
-                                <img src="{{ asset('storage/'.$item->photo) }}" alt="{{ $item->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy">
+                                <x-image :src="$item->photo" :alt="$item->name" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                             @else
                                 <div class="flex h-full w-full items-center justify-center bg-brand-50 text-brand-300">
                                     <x-icon name="sparkles" class="size-8" />

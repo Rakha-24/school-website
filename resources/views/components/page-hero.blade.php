@@ -2,7 +2,7 @@
 
 <section class="relative overflow-hidden bg-brand-950 text-white">
     @if ($image)
-        <img src="{{ asset('storage/'.$image) }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-25" loading="eager">
+        <x-image :src="$image" alt="" class="absolute inset-0 h-full w-full object-cover opacity-25" loading="eager" />
         <div class="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/80 to-brand-950/40"></div>
     @else
         <div class="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_85%_-10%,rgba(185,106,23,0.28),transparent)]"></div>

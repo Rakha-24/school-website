@@ -12,7 +12,7 @@
 
         {{-- Institutional panel --}}
         <aside class="relative hidden w-1/2 overflow-hidden border-r border-brand-800 lg:block xl:w-[55%]">
-            <img src="{{ asset('storage/seeds/campus.jpg') }}" alt="" class="absolute inset-0 h-full w-full object-cover">
+            <x-image src="seeds/campus.jpg" alt="" class="absolute inset-0 h-full w-full object-cover" loading="eager" />
             <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/85 to-brand-950/40"></div>
             <div class="relative flex h-full flex-col justify-between p-12 xl:p-16">
                 <a href="{{ route('home') }}" class="flex items-center gap-3" aria-label="Kembali ke beranda">

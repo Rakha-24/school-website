@@ -41,7 +41,7 @@
                     <article class="group flex flex-col overflow-hidden rounded-lg border border-line bg-white shadow-card transition-shadow hover:shadow-card-lg">
                         @if ($achievement->image)
                             <div class="relative aspect-[16/10] overflow-hidden">
-                                <img src="{{ asset('storage/'.$achievement->image) }}" alt="{{ $achievement->title }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy">
+                                <x-image :src="$achievement->image" :alt="$achievement->title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                                 <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-accent-200 bg-accent-50 px-2.5 py-0.5 text-xs font-semibold text-accent-800">
                                     <x-icon name="trophy" class="size-3.5" />
                                     {{ $levelLabels[$achievement->level] ?? $achievement->level }}

@@ -3,7 +3,7 @@
     {{-- Hero --}}
     <section class="relative overflow-hidden bg-brand-950 text-white">
         @if ($extracurricular->photo)
-            <img src="{{ asset('storage/'.$extracurricular->photo) }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-30" loading="eager">
+            <x-image :src="$extracurricular->photo" alt="" class="absolute inset-0 h-full w-full object-cover opacity-30" loading="eager" />
             <div class="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/90 to-brand-950/50"></div>
         @else
             <div class="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_85%_-10%,rgba(185,106,23,0.28),transparent)]"></div>
@@ -82,7 +82,7 @@
                     <a href="{{ route('extracurriculars.show', $other) }}" class="group flex items-center gap-3.5 rounded-lg border border-line bg-paper px-4 py-3.5 transition-colors hover:border-brand-500">
                         <span class="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-900 text-accent-300">
                             @if ($other->photo)
-                                <img src="{{ asset('storage/'.$other->photo) }}" alt="" class="h-full w-full object-cover">
+                                <x-image :src="$other->photo" alt="" class="h-full w-full object-cover" />
                             @else
                                 <x-icon name="sparkles" class="size-4" />
                             @endif

@@ -29,7 +29,7 @@
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                 @forelse ($items as $item)
                     <figure class="group relative aspect-square overflow-hidden rounded-lg border border-line bg-white shadow-card">
-                        <img src="{{ asset('storage/'.$item->image) }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy">
+                        <x-image :src="$item->image" :alt="$item->title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
                         <figcaption class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-brand-950/95 via-brand-950/75 to-transparent px-4 pt-10 pb-4 transition-transform duration-300 group-hover:translate-y-0">
                             <p class="text-xs font-semibold tracking-wide text-accent-300 uppercase">{{ $item->category }}</p>
                             <p class="mt-0.5 text-sm font-semibold text-white">{{ $item->title }}</p>
