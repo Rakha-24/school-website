@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Disallow: /portal
+
+Sitemap: https://smk-taruna-sains-kediri-website.vercel.app/sitemap.xml

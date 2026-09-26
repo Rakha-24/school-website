@@ -31,6 +31,7 @@ class CachePublicPage
         'extracurriculars.show',
         'gallery.index',
         'admission.show',
+        'sitemap',
     ];
 
     public function handle(Request $request, Closure $next): Response

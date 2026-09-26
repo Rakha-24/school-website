@@ -17,6 +17,7 @@ use App\Http\Controllers\Public\AcademicController;
 use App\Http\Controllers\Public\AchievementController;
 use App\Http\Controllers\Public\AdmissionController;
 use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\SitemapController;
 use App\Http\Controllers\Public\ExtracurricularController;
 use App\Http\Controllers\Public\GalleryController;
 use App\Http\Controllers\Public\NewsController;
@@ -51,6 +52,7 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact.show')
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('contact.store');
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------
