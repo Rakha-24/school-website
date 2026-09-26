@@ -43,7 +43,7 @@
         <div class="container-site grid items-center gap-12 lg:grid-cols-2">
             <div class="relative">
                 <div class="overflow-hidden rounded-lg shadow-card">
-                    <x-image src="seeds/campus.jpg" alt="Gedung SMK Taruna Sains Kediri" class="aspect-[4/3] w-full object-cover" widths="760" sizes="(min-width: 1024px) 570px, 92vw" />
+                    <x-image src="seeds/campus.jpg" alt="Gedung SMK Taruna Sains Kediri" class="aspect-[4/3] w-full object-cover" widths="380,760" sizes="(min-width: 1024px) 570px, 92vw" />
                 </div>
                 <div class="absolute -bottom-5 right-4 rounded-md border border-line bg-white px-5 py-3 shadow-card sm:-right-5">
                     <p class="font-display text-2xl font-semibold text-brand-950">{{ now()->year - 1994 }}</p>
@@ -102,7 +102,7 @@
                 ] as $p)
                     <article class="group overflow-hidden rounded-lg border border-line bg-paper shadow-card transition-shadow hover:shadow-card-lg">
                         <div class="relative aspect-[16/10] overflow-hidden">
-                            <x-image :src="'seeds/'.$p['img']" :alt="$p['name']" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                            <x-image :src="'seeds/'.$p['img']" :alt="$p['name']" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" widths="380" sizes="(min-width: 768px) 768px, 92vw" />
                             <span class="absolute top-3 left-3 rounded-md bg-brand-950/85 px-2.5 py-1 font-display text-xs font-bold tracking-wide text-accent-300">{{ $p['code'] }}</span>
                         </div>
                         <div class="p-6">
