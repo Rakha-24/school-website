@@ -47,7 +47,10 @@ class CachePublicPage
 
         $response->headers->remove('Set-Cookie');
 
-        $edge = 'public, s-maxage=300, stale-while-revalidate=3600';
+        // SWR sengaja hanya 10 menit, bukan 1 jam: HTML yang basi masih
+        // menyebut nama build lama, dan file tersebut hilang saat deploy
+        // berikutnya sehingga CSS/JS bisa 404 dan halaman tampil tanpa gaya.
+        $edge = 'public, s-maxage=300, stale-while-revalidate=600';
         $response->headers->set('Cache-Control', $edge);
         $response->headers->set('Vercel-CDN-Cache-Control', $edge);
         $response->headers->set('CDN-Cache-Control', $edge);

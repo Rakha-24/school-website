@@ -19,6 +19,17 @@
     "LOG_CHANNEL": "stderr",
     "FILESYSTEM_DISK": "public"
   },
+  "headers": [
+    {
+      "source": "/build/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/",
