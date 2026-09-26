@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\Assignment;
-use App\Models\ClassSubject;
 use App\Models\User;
 use App\Support\Access;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -35,10 +34,6 @@ class AssignmentPolicy
         return $user->isTeacher() || $user->isAdmin();
     }
 
-    public function createFor(User $user, ClassSubject $classSubject): bool
-    {
-        return $user->isAdmin() || Access::teacherManagesClassSubject($user, $classSubject);
-    }
 
     public function update(User $user, Assignment $assignment): bool
     {

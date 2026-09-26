@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Models\ClassSubject;
 use App\Models\Material;
 use App\Models\User;
 use App\Support\Access;
@@ -42,10 +41,6 @@ class MaterialPolicy
         return $user->isTeacher() || $user->isAdmin();
     }
 
-    public function createFor(User $user, ClassSubject $classSubject): bool
-    {
-        return $user->isAdmin() || Access::teacherManagesClassSubject($user, $classSubject);
-    }
 
     public function update(User $user, Material $material): bool
     {
